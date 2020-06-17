@@ -5,10 +5,11 @@ The flipping t-ratio test is a method to assess the Pareto theory reliably with 
 ## Overview
 Recently, an economics-originated theory, the Pareto theory, has gained popularity in evolutionary biology. This theory predicts that phenotypes under natural selection fall within a polytope in phenotype space.  
 To statistically assess whether given phenotype datasets fit the Pareto theory, the t-ratio test has been widely used. However, the t-ratio test suffers a serious defect because of shared phylogenetic histories and the arch effect of PCA.  
-The flipping t-ratio is an improved version of the t-ratio test, which was developed to ameliorate the problems of the "naive" t-ratio test.
-The SDVMM method is used as an unmixing algorithm,
+The flipping t-ratio is an improved version of the t-ratio test, which was developed to ameliorate the problems of the "naive" t-ratio test.  
+The SDVMM method is used to estimate archetypes.
 
 ## Requirements
+- [Matlab](https://jp.mathworks.com/products/matlab.html)
 - [ParTI](https://www.weizmann.ac.il/mcb/UriAlon/download/ParTI)
 - [@tree](https://tinevez.github.io/matlab-tree/)
 
@@ -20,6 +21,8 @@ The SDVMM method is used as an unmixing algorithm,
     [pValue, tRatio] = tRatioTest(NArchetypes, phenFile, nRan, phyloFile, method)
 ````
 
+## Arguments
+
 |Arguments           |Description                                                                                                        |
 |:------------------:|:------------------------------------------------------------------------------------------------------------------|
 |<em>NArchetypes</em>|The number of archetypes [<em>int</em>]                                                                            |
@@ -27,12 +30,6 @@ The SDVMM method is used as an unmixing algorithm,
 |<em>nRan</em>       |The number of randomizations in t-ratio test [<em>int</em>]                                                        |
 |<em>phyloFile</em>  |File name of a phylogenetic tree (newick format) [<em>character vector</em> or <em>string scalar</em>]             |
 |<em>method</em>     |An optional argument that choses algorithm of randomization. Default: 1 (flipping t-ratio test) [<em>int</em>, 1-4]|
-
-### <em>pValue</em>
-- p value calculated by the chosen method.
-
-### <em>tRatio</em>
-- t-ratio of the original dataset.
 
 ### <em>phenFile</em>
 - A csv file that has the column header and the row header is required.
@@ -42,9 +39,10 @@ The SDVMM method is used as an unmixing algorithm,
 |:---:|:-------:|:-------:|:---:|:-------:|
 |OTU 1| 0.01    | 0.02    | ... | 0.01    |
 |OTU 2| 0.04    | 0.02    | ... | 0.05    |
-|...  | ...     | ...     | ... | ...     |
+| ... |   ...   |   ...   | ... |   ...   |
 |OTU N| 0.04    | 0.02    | ... | 0.05    |
-- Make sure that the labels match the labels of <em>phyloFile</em>.
+- Make sure that the labels of the row header match the labels of <em>phyloFile</em>.
+- Labels of the column header do not affect results.
 
 ### <em>phyloFile</em>
 - An optional argument to use phylogenetic tree.
@@ -60,12 +58,20 @@ The SDVMM method is used as an unmixing algorithm,
 - 3: t-ratio test with improved PCA timing
 - 4: naive t-ratio test
 
+## Output
+
+### <em>pValue</em>
+- p value calculated by the chosen method.
+
+### <em>tRatio</em>
+- t-ratio of the original dataset.
+
 ## Example
 - An example in a synthetic dataset is shown here.
 ````
-    NArchetypes=3;
-    phenFile='Example\Example.csv';
-    nRan=1000;
-    phyloFile='Example\Example.txt';
-    [pValue,tRatio]=tRatioTest(NArchetypes,phenFile,nRan,phyloFile);
+  NArchetypes=3;
+  phenFile='Example\SyntheticExample.csv';
+  nRan=1000;
+  phyloFile='Example\SyntheticExample.nwk';
+  [pValue,tRatio]=tRatioTest(NArchetypes,phenFile,nRan,phyloFile);
 ````
