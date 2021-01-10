@@ -84,7 +84,7 @@ function [ pValue,tRatio] = tRatioTest(NArchetypes, phen_csv,nRan,phylo_tree,met
     histogram(tRatioRand,'FaceColor','red');
     hold on;   
        
-    pValue=sum(tRatioRand>tRatio)/nRan;
+    pValue=sum(tRatioRand>=tRatio)/nRan;
     X=['tRatio Real : ',num2str(tRatio)];
     disp(X);
     X=['p value : ',num2str(pValue)];

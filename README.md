@@ -35,6 +35,7 @@ The SDVMM method is used to estimate archetypes.
 - A csv file that has the column header and the row header is required.
 - Every trait must be continuous.
 - An example:
+
 |OTUs | Trait 1 | Trait 2 | ... | Trait K |
 |:---:|:-------:|:-------:|:---:|:-------:|
 |OTU 1| 0.01    | 0.02    | ... | 0.01    |
